@@ -39,6 +39,26 @@
                         </span>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                    <label for="tag">Tags</label>
+                    @foreach ( $tags as $tag )
+                        <div class="checkbox form-control">
+                            <label for="tag">
+                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                                    @foreach ($post -> tags as $t )
+                                    
+                                    @if ($t->id == $tag->id)
+                                        checked
+                                    @endif  
+                                    @endforeach
+                                >
+                                {{ $tag->tag }}
+                            </label>
+                        </div>   
+                    @endforeach
+                </div>
+
                 <div class="form-group">
                     <label for="content">Content</label>
                     <textarea id="editor" type="text" name="content" class="form-control @error('content') is-invalid @enderror">{{ $post->content}}</textarea>

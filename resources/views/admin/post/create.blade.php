@@ -37,6 +37,22 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="tag">Tags</label>
+                    @foreach ( $tags as $tag )
+                        <div class="checkbox form-control">
+                            <label for="tag">
+                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}"/>
+                                {{ $tag->tag }}
+                            </label>
+                        </div>   
+                    @endforeach
+                    {{-- @error('tag')
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror --}}
+                </div>
+
+                <div class="form-group">
                     <label for="content">Content</label>
                     <textarea type="text" id="editor" name="content" class="form-control @error('content') is-invalid @enderror">{{ old('content')}}</textarea>
                     @error('content')

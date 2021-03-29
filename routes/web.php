@@ -13,15 +13,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('index');
+Route::get('/', 'FrontEndController@index')->name('index');
+
+
+
 
 Route::group(['prefix' => 'admin','middleware' => 'auth'],function(){
-    Route::get('/category', 'CategoryController@getIndex')->name('indexCategory');
+    Route::get('/login', 'FrontEndController@getLogin');
+    Route::get('/dashboard', 'HomeController@index')->name('indexDashboard');
+
+    Route::get('/category', 'CategoryController@getIndex')->name('indexCategory');  
     Route::get('/category/create', 'CategoryController@getCreate')->name('createCategory');
     Route::post('/category/store', 'CategoryController@postStore')->name('storeCategory');
     Route::get('/category/edit/{id}', 'CategoryController@getEdit')->name('editCategory');
     Route::post('/category/update/{id}', 'CategoryController@postUpdate')->name('updateCategory');
     Route::get('/category/delete/{id}', 'CategoryController@getDelete')->name('deleteCategory');
+    
+    Route::get('/tag', 'TagController@getIndex')->name('indexTag');
+    Route::get('/tag/create', 'TagController@getCreate')->name('createTag');
+    Route::post('/tag/store', 'TagController@postStore')->name('storeTag');
+    Route::get('/tag/edit/{id}', 'TagController@getEdit')->name('editTag');
+    Route::post('/tag/update/{id}', 'TagController@postUpdate')->name('updateTag');
+    Route::get('/tag/delete/{id}', 'TagController@getDelete')->name('deleteTag');
+
+    Route::get('/user', 'UserController@getIndex')->name('indexUser');
+    Route::get('/user/create', 'UserController@getCreate')->name('createUser');
+    Route::post('/user/store', 'UserController@postStore')->name('storeUser');
+    Route::get('/user/edit/{id}', 'UserController@getEdit')->name('editUser');
+    Route::post('/user/update/{id}', 'UserController@postUpdate')->name('updateUser');
+    Route::get('/user/delete/{id}', 'UserController@getDelete')->name('deleteUser');
 
 
     Route::get('/post', 'PostController@getIndex')->name('indexPost');
